@@ -16,11 +16,14 @@
     "ext-xml": "*",
     "ext-pcre": "*",
     "ext-ctype": "*",
-    "ext-hash": "*"
+    "ext-hash": "*",
+    "vlucas/phpdotenv": "^5.1"
   },
   "autoload": {
     "psr-0": {},
-    "psr-4": {}
+    "psr-4": {
+      "Rosatom\\Common\\": "src/modules/common"
+    }
   },
   "scripts": {
     "copyEnv": "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
