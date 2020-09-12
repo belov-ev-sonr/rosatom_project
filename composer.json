@@ -17,7 +17,8 @@
     "ext-pcre": "*",
     "ext-ctype": "*",
     "ext-hash": "*",
-    "vlucas/phpdotenv": "^5.1"
+    "vlucas/phpdotenv": "^5.1",
+    "bupy7/xml-constructor": "*"
   },
   "autoload": {
     "psr-0": {},
