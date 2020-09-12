@@ -17,7 +17,7 @@ class AuthorizationRoute
      */
     public function __construct(App $app)
     {
-        $app->post('/login', [$this, 'login']);
+        $app->post('/', [$this, 'login']);
     }
 
     public function login(Request $request, Response $response){
