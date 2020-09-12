@@ -29,7 +29,9 @@ class FinReportCRUD
 
        $readDepositedMoney = $this->readDepositedMoney($inn);
 
-       $readFineReport = $readOrganization + $readDepositedMoney;
+       $readAccountBalance = $this->readAccountBalance($inn);
+
+       $readFineReport = $readOrganization + $readDepositedMoney + $readAccountBalance;
 
        return $readFineReport;
     }
@@ -40,6 +42,11 @@ class FinReportCRUD
 
     public function readDepositedMoney(int $inn){
         return $this->sqlRepositories->readDepositedMoney($inn);
+    }
+
+    public function readAccountBalance(int $inn)
+    {
+        return $this->sqlRepositories->readAccountBalance($inn);
     }
 
 }
