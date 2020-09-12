@@ -33,9 +33,12 @@ class FinReportRoute
         return 'help';
     }
 
-    public function updatFinReport(Request $request, Response $response){
-        $dataInsert = $request->getParsedBody();
-        $saverDTO = new FinReportDTO($dataInsert);
+    public function updateFinReport(Request $request, Response $response){
+        $dataUpdate['inn'] = $request->getAttribute('inn');
+        $dataUpdate = $request->getParsedBody();
+        $saverDTO = new FinReportDTO($dataUpdate);
+        $updateFinReport = new FinReportCRUD();
+        $updateFinReport->updateFinReport($saverDTO);
 
     }
 

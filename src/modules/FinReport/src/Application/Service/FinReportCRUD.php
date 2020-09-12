@@ -2,6 +2,7 @@
 
 namespace Rosatom\FinReport\Application\Service\FinReportCRUD;
 
+use Rosatom\FinReport\Infrastructure\DTO\FinReportDTO\FinReportDTO;
 use Rosatom\FinReport\Infrastructure\Repositories\FinReportSqlRepositories\FinReportSqlRepositories;
 
 class FinReportCRUD
@@ -73,5 +74,12 @@ class FinReportCRUD
         return $this->sqlRepositories->deleteAccountBalance($inn);
     }
 
+    public function updateFinReport(FinReportDTO $dataUpdate){
+        $this->sqlRepositories->updateAccountBalance($dataUpdate);
+
+        $this->sqlRepositories->updateOrganization($dataUpdate);
+
+        return $this->sqlRepositories->updateDepositedMoney($dataUpdate);
+    }
 
 }
