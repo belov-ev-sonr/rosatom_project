@@ -1,6 +1,6 @@
 <?php
 
-namespace Rosatom\Authorization\src\Presentation\Controllers;
+namespace Rosatom\Authorization\Presentation\Controllers;
 
 class AuthorizationController
 {
