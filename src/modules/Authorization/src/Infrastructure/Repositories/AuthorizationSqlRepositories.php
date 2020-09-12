@@ -44,7 +44,6 @@ class AuthorizationSqlRepositories
                 AND 
                 `password_login` = '$passwordLogin'
                 ";
-
         var_dump($sql);
         die();
         $idUser = $this->dbContext->select($sql);

@@ -21,8 +21,6 @@ class AuthorizationRoute
     }
 
     public function login(Request $request, Response $response){
-        var_dump('ssss');
-        die();
         $dataLogin = $request->getParsedBody();
         $dataLoginDTO = new AuthorizationDTO($dataLogin);
         $loginIn = new AutorizationCRUD();
