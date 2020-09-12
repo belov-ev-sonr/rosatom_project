@@ -24,7 +24,9 @@
     "psr-0": {},
     "psr-4": {
       "Rosatom\\Common\\": "src/modules/common",
-      "Rosatom\\FinReport\\": "src/modules/FinReport/src/"
+      "Rosatom\\FinReport\\": "src/modules/FinReport/src/",
+      "Rosatom\\Converters\\": "src/modules/Converters/src/",
+      "Rosatom\\Reports\\": "src/modules/Reports/src/"
     }
   },
   "scripts": {
