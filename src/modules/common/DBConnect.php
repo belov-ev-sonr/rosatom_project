@@ -15,6 +15,7 @@ class DBConnect
      */
     private function __construct()
     {
+        self::init();
     }
 
     public static function getInstance() {
@@ -32,21 +33,23 @@ class DBConnect
     {
     }
 
+
     /**
      * @return mysqli
      */
     public static function getMysqli()
     {
-        return self::$mysqli;
+        $instans = self::getInstance();
+        return $instans::$mysqli;
     }
 
     public static function init(): void
     {
-        $host = getenv('DB_HOST');
-        $user = getenv('DB_USER');
-        $pass = getenv('DB_PASS');
-        $dbName = getenv('DB_NAME');
-        $port = getenv('DB_PORT');
+        $host ='vh58.timeweb.ru';
+        $user = 'kyplinov_rosatom';
+        $pass = 'qwerosatom1234';
+        $dbName = 'kyplinov_rosatom';
+        $port = '3306';
         $resource = new \mysqli($host, $user, $pass, $dbName, $port);
         self::isDBError($resource);
         self::$mysqli = $resource;
@@ -54,7 +57,7 @@ class DBConnect
 
     private static function isDBError(mysqli $resource): void
     {
-        if ($resource->error) {
+        if (!$resource) {
             exit($resource->error);
         }
     }

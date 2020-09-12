@@ -26,15 +26,13 @@ class MySqlAdapter
      */
     public function select($sql, $resultFormat = 1, &$result = null)
     {
-
         $result_query = DBConnect::getMysqli()->query($sql);
         if (!$result_query) {
             throw new \Exception("Error mysql request!\n" . DBConnect::getMysqli()->error);
         }
-
         $result = $result ?: array();
         if ($resultFormat == 1) {
-            while ($row = $result_query->fetch_array()) {
+            while ($row = $result_query->fetch_assoc()) {
                 $result[] = $row;
             }
         } elseif ($resultFormat == 2) {

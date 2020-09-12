@@ -22,7 +22,8 @@
   "autoload": {
     "psr-0": {},
     "psr-4": {
-      "Rosatom\\Common\\": "src/modules/common"
+      "Rosatom\\Common\\": "src/modules/common",
+      "Rosatom\\FinReport\\": "src/modules/FinReport/src/"
     }
   },
   "scripts": {
