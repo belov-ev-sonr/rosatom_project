@@ -49,4 +49,29 @@ class FinReportCRUD
         return $this->sqlRepositories->readAccountBalance($inn);
     }
 
+    public function deleteFinReport(int $inn)
+    {
+        $this->deleteOrganization($inn);
+
+        $this->deleteDepositedMoney($inn);
+
+        $this->deleteAccountBalance($inn);
+    }
+
+    public function deleteOrganization(int $inn)
+    {
+        $this->sqlRepositories->deleteOrganization($inn);
+
+    }
+
+    public function deleteDepositedMoney(int $inn){
+        return $this->sqlRepositories->deleteDepositedMoney($inn);
+    }
+
+    public function deleteAccountBalance(int $inn)
+    {
+        return $this->sqlRepositories->deleteAccountBalance($inn);
+    }
+
+
 }

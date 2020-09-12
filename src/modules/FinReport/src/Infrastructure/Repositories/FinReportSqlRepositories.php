@@ -72,4 +72,37 @@ class FinReportSqlRepositories
         return $listAccountBalance;
     }
 
+    public function deleteOrganization(int $inn){
+        $sql = "
+                DELETE  
+                FROM 
+                organization 
+                WHERE 
+                `inn` = '$inn'
+                ";
+        $this->getDbCon()->delete($sql);
+    }
+
+    public function deleteDepositedMoney(int $inn){
+        $sql = "
+                DELETE  
+                FROM 
+                deposited_money 
+                WHERE 
+                `inn_of_organization` = '$inn'
+                ";
+        $this->getDbCon()->delete($sql);
+    }
+
+    public function deleteAccountBalance(int $inn){
+        $sql = "
+                DELETE  
+                FROM 
+                account_balance 
+                WHERE 
+                `inn_of_organization` = '$inn'
+                ";
+        $this->getDbCon()->delete($sql);
+    }
+
 }

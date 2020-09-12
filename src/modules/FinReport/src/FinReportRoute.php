@@ -40,7 +40,10 @@ class FinReportRoute
     }
 
     public function deleteFinReport(Request $request, Response $response){
-
+        $inn = $request->getAttribute('inn');
+        $deleteFinReport = new FinReportCRUD();
+        $deleteId = $deleteFinReport->deleteFinReport($inn);
+        return $response->withJson($deleteId);
     }
 
 }
