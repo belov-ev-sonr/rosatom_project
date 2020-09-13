@@ -1,6 +1,7 @@
 <?php
 
 use Dotenv\Dotenv;
+use Rosatom\Auth\Presentation\AuthRouter;
 use Rosatom\Common\DBConnect;
 use Rosatom\Converters\App\Services\XMLConverter;
 use Rosatom\FinReport\FinReportRoute;
@@ -20,14 +21,12 @@ $app->get('/help', function (Request $request, Response $response, $args) {
     return $response->getBody()->write('hello');
 });
 
-$app->get('/xml', function (Request $request, Response $response, $args) {
-    $xmlConverter = new XMLConverter();
-    print_r($xmlConverter->xmlConvert());
-    return $response->withJson(1);
-});
-
 $app->group('/reports', function () {
     return new ReportsRouter($this);
+});
+
+$app->group('/auth', function () {
+    return new AuthRouter($this);
 });
 
 $app->group('/finreport', function () {

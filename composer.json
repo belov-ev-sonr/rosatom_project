@@ -26,7 +26,9 @@
       "Rosatom\\Common\\": "src/modules/common",
       "Rosatom\\FinReport\\": "src/modules/FinReport/src/",
       "Rosatom\\Converters\\": "src/modules/Converters/src/",
-      "Rosatom\\Reports\\": "src/modules/Reports/src/"
+      "Rosatom\\Reports\\": "src/modules/Reports/src/",
+      "Rosatom\\Auth\\": "src/modules/Auth/src/",
+      "Rosatom\\User\\": "src/modules/User/src/"
     }
   },
   "scripts": {
