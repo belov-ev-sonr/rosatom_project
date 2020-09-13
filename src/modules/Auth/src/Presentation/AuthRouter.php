@@ -15,5 +15,6 @@ class AuthRouter
     {
         $app->post("/login", [new AuthController(), 'login']);
         $app->post("/refresh", [new AuthController(), 'refresh']);
+        $app->get("/getUser", [new AuthController(), 'getUserByRefreshToken']);
     }
 }

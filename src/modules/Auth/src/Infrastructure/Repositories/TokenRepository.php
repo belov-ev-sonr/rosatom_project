@@ -48,7 +48,7 @@ class TokenRepository implements ITokenRepository
     {
         $sql = "SELECT
                   id,
-                  user_id,
+                  user_id `userId`,
                   expired,
                   `time`,
                   refresh_token

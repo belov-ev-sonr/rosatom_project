@@ -4,6 +4,7 @@ namespace Rosatom\Auth\Presentation\Controllers;
 use Rosatom\Auth\App\Services\TokenService;
 use Rosatom\Auth\Infrastructure\Factories\TokenRepositoryFactory;
 use Rosatom\User\Infrastructure\Factories\UserRepositoryFactory;
+use Rosatom\User\Presentation\Presenters\UserPresenter;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
@@ -28,7 +29,28 @@ class AuthController
             $response = $response
                 ->withStatus(401)
                 ->withJson([
-                'status' => false
+                    'status' => false,
+                    'message' => 'Указан неверный Email или пароль'
+            ]);
+        }
+
+        return $response;
+    }
+
+    public function getUserByRefreshToken(Request $request, Response $response): Response
+    {
+        $refreshToken = $request->getQueryParam('token');
+
+        $tokenService = $this->getTokenService();
+        $userAccess = $tokenService->checkRefreshToken($refreshToken);
+        if ($userAccess) {
+            $userRepository = UserRepositoryFactory::createRepository();
+            $user = $userRepository->getUserById($userAccess->getUserId());
+            $response = $response->withJson(new UserPresenter($user));
+        } else {
+            $response = $response->withStatus(400)->withJson([
+                'status' => false,
+                'message' => 'Not correct data'
             ]);
         }
 

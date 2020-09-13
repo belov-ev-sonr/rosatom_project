@@ -6,7 +6,15 @@ class User
     /** @var int */
     private $id;
     /** @var string */
-    private $name;
+    private $login;
+    /** @var string */
+    private $firstName;
+    /** @var string */
+    private $secondName;
+    /** @var string */
+    private $middleName;
+    /** @var string */
+    private $phone;
     /** @var string */
     private $password;
     /** @var string */
@@ -19,11 +27,23 @@ class User
     {
     }
 
-    public static function from(int $id, string $name, string $password, string $email): self
-    {
+    public static function from(
+        int $id,
+        string $login,
+        string $firstName,
+        string $secondName,
+        string $middleName,
+        string $phone,
+        string $password,
+        string $email
+    ): self {
         $user = new self();
         $user->id = $id;
-        $user->name = $name;
+        $user->login = $login;
+        $user->firstName = $firstName;
+        $user->secondName = $secondName;
+        $user->middleName = $middleName;
+        $user->phone = $phone;
         $user->password = $password;
         $user->email = $email;
 
@@ -34,7 +54,11 @@ class User
     {
         $user = new self();
         $user->id = (int)$userData['id'];
-        $user->name = (string)$userData['name'];
+        $user->login = (string)$userData['login'];
+        $user->firstName = (string)$userData['firstName'];
+        $user->secondName = (string)$userData['secondName'];
+        $user->middleName = (string)$userData['middleName'];
+        $user->phone = (string)$userData['phone'];
         $user->password = (string)$userData['password'];
         $user->email = (string)$userData['email'];
 
@@ -52,9 +76,9 @@ class User
     /**
      * @return string
      */
-    public function getName(): string
+    public function getLogin(): string
     {
-        return $this->name;
+        return $this->login;
     }
 
     /**
@@ -71,5 +95,37 @@ class User
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSecondName(): string
+    {
+        return $this->secondName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMiddleName(): string
+    {
+        return $this->middleName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone(): string
+    {
+        return $this->phone;
     }
 }

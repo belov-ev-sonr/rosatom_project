@@ -35,17 +35,39 @@ class UserRepository implements IUserRepository
     {
         $sql = "SELECT
                   id,
-                  name_login `name`,
-                  password_login `password`,
-                  email_login `email`
-                FROM `user` 
-                WHERE `email_login` = '{$email}'
-                AND `password_login` = '{$password}'
+                  login,
+                  password `password`,
+                  email `email`,
+                  first_name `firstName`,
+                  second_name `secondName`,
+                  middle_name `middleName`,
+                  phone
+                  FROM `user` 
+                WHERE `email` = '{$email}'
+                AND `password` = '{$password}'
                 LIMIT 1";
 
         $result = $this->getAdapter()->select($sql)[0];
         return $result ? User::fromArray($result) : null;
     }
 
+    public function getUserById(int $id): ?User
+    {
+        $sql = "SELECT
+                  id,
+                  login,
+                  password `password`,
+                  email `email`,
+                  first_name `firstName`,
+                  second_name `secondName`,
+                  middle_name `middleName`,
+                  phone
+                FROM `user` 
+                WHERE `id` = '{$id}'
+                LIMIT 1";
+
+        $result = $this->getAdapter()->select($sql)[0];
+        return $result ? User::fromArray($result) : null;
+    }
 
 }
