@@ -43,34 +43,15 @@ class FinReportRoute
     public function insertFinReport(Request $request, Response $response){
         $insertFinReport = new FinReportCRUD();
         $dataInsert = $request->getParsedBody();
-        $inn = $dataInsert['infoOrg']['inn'];
 
-        $datasDepositedMoney = $dataInsert['depositedMoney'];
-        foreach ($datasDepositedMoney as $dataDepositedMoney){
+        var_dump($dataInsert);
+        die();
 
-            $dataDepositedMoney['date_of_signing'] = $this->parseUTCDate($dataDepositedMoney['date_of_signing']);
-            $dataDepositedMoney['date_start'] = $this->parseUTCDate($dataDepositedMoney['date_start']);
-            $dataDepositedMoney['date_end'] = $this->parseUTCDate($dataDepositedMoney['date_end']);
-            $dataDepositedMoney['inn'] = $inn;
+        $saverDTO = new FinReportDTO($dataInsert);
 
-            $saveDepositedMoneyDTO = new FinReportDTO($dataDepositedMoney);
-            $insertId =  $insertFinReport->insertDepositedMoney($saveDepositedMoneyDTO);
-        }
-
-        $datasAccountBalance = $dataInsert['accountBalance'];
-        foreach ($datasAccountBalance as $dataAccountBalance){
-
-            $dataAccountBalance['inn'] = $inn;
-
-            $saveAccountBalanceDTO = new FinReportDTO($dataAccountBalance);
-            $insertFinReport->insertAccountBalance($saveAccountBalanceDTO);
-        }
-
-        $dataOrganization = $dataInsert['infoOrg'];
-        $saverDTO = new FinReportDTO($dataOrganization);
 
         $insertFinReport->insertOrganization($saverDTO);
-        return $response->withJson($insertId);
+
     }
 
     public function updateFinReport(Request $request, Response $response){

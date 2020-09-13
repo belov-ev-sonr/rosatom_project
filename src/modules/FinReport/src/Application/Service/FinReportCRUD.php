@@ -89,10 +89,14 @@ class FinReportCRUD
 
     public function insertOrganization(FinReportDTO $dataInsertOrganization){
 
+        $this->sqlRepositories->insertOrganization($dataInsertOrganization);
+        $this->sqlRepositories->insertDepositedMoney($dataInsertOrganization);
+        $this->sqlRepositories->insertAccountBalance($dataInsertOrganization);
+        /*
         $isEmptyOrg = $this->sqlRepositories->readOrganization($dataInsertOrganization->getInn());
         if(empty($isEmptyOrg)){
             $this->sqlRepositories->insertOrganization($dataInsertOrganization);
-        }
+        }*/
     }
 
     public function insertDepositedMoney(FinReportDTO $dataDepositedMoney){
@@ -108,14 +112,21 @@ class FinReportCRUD
 
     public function readFinReports(){
         $orgs = $this->sqlRepositories->readOrganizations();
-        $orgsForParams = [];
-        $i=1;
+
+
+
+        $organizationsForParams = [];
+
         foreach ($orgs as $org){
-            $i +=1;
-            $orgsForParams[$org['inn']]['infoOrg'] = $org;
-            $orgsForParams[$org['inn']]['depositedMoney'] = $this->readDepositedMoney($org['inn']);
-            $orgsForParams[$org['inn']]['accountBalance'] = $this->readAccountBalance($org['inn']);
+            $id = $org['id'];
+            $readDepositedMoney = $this->readDepositedMoney($org['inn']);
+
+            $readAccountBalance = $this->readAccountBalance($org['inn']);
+
+            $organizationsForParams[$id] = $org + $readDepositedMoney + $readAccountBalance;
+
         }
-        return $orgsForParams;
+
+        return $organizationsForParams;
     }
 }

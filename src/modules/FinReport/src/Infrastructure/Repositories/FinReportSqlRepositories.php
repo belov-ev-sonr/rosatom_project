@@ -53,7 +53,7 @@ class FinReportSqlRepositories
                 WHERE 
                 `inn_of_organization` = '$inn'
                 ";
-        $listDepositedMoney = $this->getDbCon()->select($sql);
+        $listDepositedMoney = $this->getDbCon()->select($sql)[0];
         return $listDepositedMoney;
     }
 
@@ -71,7 +71,7 @@ class FinReportSqlRepositories
                 WHERE 
                 `inn_of_organization` = '$inn'
                 ";
-        $listAccountBalance = $this->getDbCon()->select($sql);
+        $listAccountBalance = $this->getDbCon()->select($sql)[0];
         return $listAccountBalance;
     }
 
@@ -289,6 +289,7 @@ class FinReportSqlRepositories
     public function readOrganizations(){
         $sql = "
                 SELECT
+                id,
                 inn,
                 kpp,
                 name,
