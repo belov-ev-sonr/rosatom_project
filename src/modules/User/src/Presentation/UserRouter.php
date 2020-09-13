@@ -15,5 +15,8 @@ class UserRouter
     {
         $app->post('/list', [new UserController(), 'getUsersList']);
         $app->get('/{id}', [new UserController(), 'getUsersById']);
+        $app->put('/edit', [new UserController(), 'updateUser']);
+        $app->post('/create', [new UserController(), 'createUser']);
+        $app->put('/deactivate/{id}', [new UserController(), 'deactivateUser']);
     }
 }
