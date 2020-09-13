@@ -53,6 +53,7 @@ class FinReportCRUD
 
     public function deleteFinReport(int $id)
     {
+
         $this->deleteOrganization($id);
 
         $this->deleteDepositedMoney($id);
@@ -60,9 +61,9 @@ class FinReportCRUD
         $this->deleteAccountBalance($id);
     }
 
-    public function deleteOrganization(int $inn)
+    public function deleteOrganization(int $id)
     {
-        $this->sqlRepositories->deleteOrganization($inn);
+        $this->sqlRepositories->deleteOrganization($id);
 
     }
 

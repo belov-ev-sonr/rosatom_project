@@ -103,7 +103,7 @@ class FinReportRoute
         $id = $request->getAttribute('id');
         $deleteFinReport = new FinReportCRUD();
         $deleteId = $deleteFinReport->deleteFinReport($id);
-        return $response->withJson($deleteId);
+        return $response->withJson($id);
     }
 
     public function readFinReports(Request $request, Response $response){

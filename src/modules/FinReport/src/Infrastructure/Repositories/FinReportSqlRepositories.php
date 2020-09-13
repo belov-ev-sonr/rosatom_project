@@ -82,6 +82,7 @@ class FinReportSqlRepositories
                 WHERE 
                 `id` = '$id'
                 ";
+
         $this->getDbCon()->delete($sql);
     }
 
