@@ -286,4 +286,17 @@ class FinReportSqlRepositories
         $this->getDbCon()->insert($sql);
     }
 
+    public function readOrganizations(){
+        $sql = "
+                SELECT
+                inn,
+                kpp,
+                name,
+                is_filial
+                FROM
+                new_org
+                ";
+        return $this->getDbCon()->select($sql);
+    }
+
 }

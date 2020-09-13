@@ -20,6 +20,7 @@ class FinReportRoute
         $app->post('/', [$this, 'insertFinReport']);
         $app->put('/{inn}', [$this, 'updateFinReport']);
         $app->delete('/{inn}', [$this, 'deleteFinReport']);
+        $app->get('/', [$this, 'readFinReports']);
     }
 
     public function parseUTCDate($strDate)
@@ -111,6 +112,11 @@ class FinReportRoute
         $deleteFinReport = new FinReportCRUD();
         $deleteId = $deleteFinReport->deleteFinReport($inn);
         return $response->withJson($deleteId);
+    }
+
+    public function readFinReports(Request $request, Response $response){
+        $readFinReports = new FinReportCRUD();
+        return $response->withJson($readFinReports->readFinReports());
     }
 
 }

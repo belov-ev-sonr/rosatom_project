@@ -104,4 +104,18 @@ class FinReportCRUD
     public function insertAccountBalance(FinReportDTO $dataAccountBalance){
         $this->sqlRepositories->insertAccountBalance($dataAccountBalance);
     }
+
+
+    public function readFinReports(){
+        $orgs = $this->sqlRepositories->readOrganizations();
+        $orgsForParams = [];
+        $i=1;
+        foreach ($orgs as $org){
+            $i +=1;
+            $orgsForParams[$org['inn']]['infoOrg'] = $org;
+            $orgsForParams[$org['inn']]['depositedMoney'] = $this->readDepositedMoney($org['inn']);
+            $orgsForParams[$org['inn']]['accountBalance'] = $this->readAccountBalance($org['inn']);
+        }
+        return $orgsForParams;
+    }
 }
