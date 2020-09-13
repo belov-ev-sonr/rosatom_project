@@ -19,7 +19,7 @@ class FinReportRoute
         $app->get('/{inn}', [$this,'readFinReport']);
         $app->post('/', [$this, 'insertFinReport']);
         $app->put('/{inn}', [$this, 'updateFinReport']);
-        $app->delete('/{inn}', [$this, 'deleteFinReport']);
+        $app->delete('/{id}', [$this, 'deleteFinReport']);
         $app->get('/', [$this, 'readFinReports']);
     }
 
@@ -43,34 +43,17 @@ class FinReportRoute
     public function insertFinReport(Request $request, Response $response){
         $insertFinReport = new FinReportCRUD();
         $dataInsert = $request->getParsedBody();
-        $inn = $dataInsert['infoOrg']['inn'];
 
-        $datasDepositedMoney = $dataInsert['depositedMoney'];
-        foreach ($datasDepositedMoney as $dataDepositedMoney){
-
-            $dataDepositedMoney['date_of_signing'] = $this->parseUTCDate($dataDepositedMoney['date_of_signing']);
-            $dataDepositedMoney['date_start'] = $this->parseUTCDate($dataDepositedMoney['date_start']);
-            $dataDepositedMoney['date_end'] = $this->parseUTCDate($dataDepositedMoney['date_end']);
-            $dataDepositedMoney['inn'] = $inn;
-
-            $saveDepositedMoneyDTO = new FinReportDTO($dataDepositedMoney);
-            $insertId =  $insertFinReport->insertDepositedMoney($saveDepositedMoneyDTO);
+        if (count($dataInsert) > 1){
+            foreach ($dataInsert as $itemInsert){
+                $saverDTO = new FinReportDTO($itemInsert);
+                $insertFinReport->insertOrganization($saverDTO);
+            }
+        }else{
+            $saverDTO = new FinReportDTO($dataInsert);
+            $insertFinReport->insertOrganization($saverDTO);
         }
 
-        $datasAccountBalance = $dataInsert['accountBalance'];
-        foreach ($datasAccountBalance as $dataAccountBalance){
-
-            $dataAccountBalance['inn'] = $inn;
-
-            $saveAccountBalanceDTO = new FinReportDTO($dataAccountBalance);
-            $insertFinReport->insertAccountBalance($saveAccountBalanceDTO);
-        }
-
-        $dataOrganization = $dataInsert['infoOrg'];
-        $saverDTO = new FinReportDTO($dataOrganization);
-
-        $insertFinReport->insertOrganization($saverDTO);
-        return $response->withJson($insertId);
     }
 
     public function updateFinReport(Request $request, Response $response){
@@ -108,9 +91,9 @@ class FinReportRoute
     }
 
     public function deleteFinReport(Request $request, Response $response){
-        $inn = $request->getAttribute('inn');
+        $id = $request->getAttribute('id');
         $deleteFinReport = new FinReportCRUD();
-        $deleteId = $deleteFinReport->deleteFinReport($inn);
+        $deleteId = $deleteFinReport->deleteFinReport($id);
         return $response->withJson($deleteId);
     }
 
