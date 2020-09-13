@@ -5,6 +5,7 @@ use Rosatom\Auth\Presentation\AuthRouter;
 use Rosatom\Common\DBConnect;
 use Rosatom\FinReport\FinReportRoute;
 use Rosatom\Reports\Presentation\ReportsRouter;
+use Rosatom\User\Presentation\UserRouter;
 use Slim\App;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -20,16 +21,16 @@ $app = new App($config);
 
 DBConnect::init();
 
-$app->get('/help', function (Request $request, Response $response, $args) {
-    return $response->getBody()->write('hello');
-});
-
 $app->group('/reports', function () {
     return new ReportsRouter($this);
 });
 
 $app->group('/auth', function () {
     return new AuthRouter($this);
+});
+
+$app->group('/user', function () {
+    return new UserRouter($this);
 });
 
 $app->group('/finreport', function () {

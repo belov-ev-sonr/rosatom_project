@@ -70,4 +70,29 @@ class UserRepository implements IUserRepository
         return $result ? User::fromArray($result) : null;
     }
 
+    /**
+     * @return User[]
+     * @throws \Exception
+     */
+    public function getUsersList(): array
+    {
+        $sql = "SELECT
+                  id,
+                  login,
+                  password `password`,
+                  email `email`,
+                  first_name `firstName`,
+                  second_name `secondName`,
+                  middle_name `middleName`,
+                  phone
+                FROM `user`";
+
+        $result = $this->getAdapter()->select($sql);
+        $usersList = [];
+        foreach ($result as $row) {
+            $usersList[] = User::fromArray($row);
+        }
+        return $usersList;
+    }
+
 }
