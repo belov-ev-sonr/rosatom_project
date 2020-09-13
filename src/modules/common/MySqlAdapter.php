@@ -38,7 +38,7 @@ class MySqlAdapter
         } elseif ($resultFormat == 2) {
             $result = array('head'=>[],
                 'body'=>[]);
-            while ($row =$result_query->fetch_field()) {
+            while ($row =$result_query->fetch_assoc()) {
                 $result['head'][] = $row->name;
             }
             while ($row = $result_query->fetch_array()) {

@@ -29,7 +29,7 @@ class FinReportSqlRepositories
                 SELECT 
                 * 
                 FROM 
-                organization 
+                new_org 
                 WHERE 
                 `inn` = '$inn'
                 ";
@@ -40,6 +40,7 @@ class FinReportSqlRepositories
     public function readDepositedMoney(int $inn){
         $sql = "
                 SELECT 
+                id,
                 type_of_contract,
                 date_of_signing,
                 date_start,
@@ -52,7 +53,7 @@ class FinReportSqlRepositories
                 WHERE 
                 `inn_of_organization` = '$inn'
                 ";
-        $listDepositedMoney = $this->getDbCon()->select($sql)[0];
+        $listDepositedMoney = $this->getDbCon()->select($sql);
         return $listDepositedMoney;
     }
 
@@ -70,7 +71,7 @@ class FinReportSqlRepositories
                 WHERE 
                 `inn_of_organization` = '$inn'
                 ";
-        $listAccountBalance = $this->getDbCon()->select($sql)[0];
+        $listAccountBalance = $this->getDbCon()->select($sql);
         return $listAccountBalance;
     }
 
@@ -78,7 +79,7 @@ class FinReportSqlRepositories
         $sql = "
                 DELETE  
                 FROM 
-                organization 
+                new_org 
                 WHERE 
                 `inn` = '$inn'
                 ";
@@ -124,10 +125,11 @@ class FinReportSqlRepositories
                 `name_of_bank` = '$name_of_bank',
                 `comment` = '$comment',
                 `currency` = '$currency',
-                `balance` = $balance,
-                `id_bank_account` = $id_bank_account
-                WHERE 
+                `balance` = '$balance',
+                `id_bank_account` = '$id_bank_account',
                 `inn_of_organization` = '$inn'
+                WHERE 
+                `bic_of_bank` = '$bic_of_bank'
                 ";
 
         $this->getDbCon()->update($sql);
@@ -143,6 +145,7 @@ class FinReportSqlRepositories
         $currency = $dataUpdate->getCurrency();
         $amount = $dataUpdate->getAmount();
         $inn = $dataUpdate->getInn();
+        $id = $dataUpdate->getId();
 
         $sql = "
                 UPDATE
@@ -152,11 +155,12 @@ class FinReportSqlRepositories
                 `date_of_signing` = '$date_of_signing',
                 `date_start` = '$date_start',
                 `date_end` = '$date_end',
-                `interest_rate` = $interest_rate,
-                `currency` = $currency,
-                `amount` = $amount,
-                WHERE 
+                `interest_rate` = '$interest_rate',
+                `currency` = '$currency',
+                `amount` = '$amount',
                 `inn_of_organization` = '$inn'
+                WHERE 
+                `id` = '$id'
                 ";
 
         $this->getDbCon()->update($sql);
@@ -168,7 +172,7 @@ class FinReportSqlRepositories
                                                deposited_money
                                                WHERE 
                                                inn_of_organization = '$inn'
-                                                ");
+                                                ")[0]['id'];
     }
 
     public function updateOrganization(FinReportDTO $dataUpdate){
@@ -179,16 +183,107 @@ class FinReportSqlRepositories
 
         $sql = "
                 UPDATE
-                deposited_money
+                new_org
                 SET 
                 `kpp` = '$kpp',
                 `name` = '$nameOrg',
-                `is_filial` = '$is_filial',
+                `is_filial` = '$is_filial'
                 WHERE 
                 `inn` = '$inn'
                 ";
 
         $this->getDbCon()->update($sql);
+    }
+
+    public function insertOrganization(FinReportDTO $dataInsert){
+        $kpp = $dataInsert->getKpp();
+        $nameOrg = $dataInsert->getNameOrganization();
+        $is_filial = $dataInsert->getIsFilial();
+        $inn = $dataInsert->getInn();
+
+        $sql = "
+                INSERT INTO 
+                new_org
+                (`kpp`,
+                `name`,
+                `is_filial`,
+                `inn`)
+                VALUES 
+                 ('$kpp',
+                 '$nameOrg',
+                 '$is_filial',
+                 '$inn')
+                ";
+
+        $this->getDbCon()->insert($sql);
+    }
+
+    public function insertDepositedMoney(FinReportDTO $dataInsert){
+        $type_of_contract = $dataInsert->getTypeOfContract();
+        $date_of_signing = $dataInsert->getDateOfSigning();
+        $date_start = $dataInsert->getDateStart();
+        $date_end =$dataInsert->getDateEnd();
+        $interest_rate = $dataInsert->getInterestRate();
+        $currency = $dataInsert->getCurrency();
+        $amount = $dataInsert->getAmount();
+        $inn = $dataInsert->getInn();
+
+        $sql = "
+                INSERT INTO 
+                deposited_money
+                (`type_of_contract`,
+                `date_of_signing`,
+                `date_start`,
+                `date_end`,
+                `interest_rate`,
+                `currency`,
+                `amount`,
+                `inn_of_organization`)
+                VALUES 
+                 ('$type_of_contract',
+                 '$date_of_signing',
+                 '$date_start',
+                 '$date_end',
+                 '$interest_rate',
+                 '$currency',
+                 '$amount',
+                 '$inn')
+                ";
+        $this->getDbCon()->insert($sql);
+
+        return $this->getDbCon()->getLastInsertId();
+    }
+
+    public function insertAccountBalance(FinReportDTO $dataInsert){
+        $bic_of_bank = $dataInsert->getBicOfBank();
+        $name_of_bank = $dataInsert->getNameOfBank();
+        $comment = $dataInsert->getComment();
+        $currency = $dataInsert->getAccountBalanceCurrency();
+        $balance = $dataInsert->getBalance();
+        $id_bank_account = $dataInsert->getIdBankAccount();
+        $inn = $dataInsert->getInn();
+
+        $sql = "
+                INSERT INTO 
+                account_balance
+                (`bic_of_bank`,
+                `name_of_bank`,
+                `comment`,
+                `currency`,
+                `balance`,
+                `id_bank_account`,
+                `inn_of_organization`)
+                VALUES
+                 ('$bic_of_bank',
+                 '$name_of_bank',
+                 '$comment',
+                 '$currency',
+                 '$balance',
+                 '$id_bank_account',
+                 '$inn')
+                ";
+
+        $this->getDbCon()->insert($sql);
     }
 
 }
