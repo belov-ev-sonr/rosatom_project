@@ -17,12 +17,18 @@
     "ext-pcre": "*",
     "ext-ctype": "*",
     "ext-hash": "*",
-    "vlucas/phpdotenv": "^5.1"
+    "vlucas/phpdotenv": "^5.1",
+    "bupy7/xml-constructor": "*"
   },
   "autoload": {
     "psr-0": {},
     "psr-4": {
-      "Rosatom\\Common\\": "src/modules/common"
+      "Rosatom\\Common\\": "src/modules/common",
+      "Rosatom\\FinReport\\": "src/modules/FinReport/src/",
+      "Rosatom\\Converters\\": "src/modules/Converters/src/",
+      "Rosatom\\Reports\\": "src/modules/Reports/src/",
+      "Rosatom\\Auth\\": "src/modules/Auth/src/",
+      "Rosatom\\User\\": "src/modules/User/src/"
     }
   },
   "scripts": {
