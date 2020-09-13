@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<<<< Temporary merge branch 1
     "content-hash": "ab861a0bbd6b9ec06d4b205cd53f4616",
+=========
+    "content-hash": "f09407e97ad43f4aea7253eac0c38290",
+>>>>>>>>> Temporary merge branch 2
     "packages": [
         {
             "name": "bupy7/xml-constructor",
@@ -164,6 +168,7 @@
                 "Result-Type",
                 "result"
             ],
+<<<<<<<<< Temporary merge branch 1
             "support": {
                 "issues": "https://github.com/GrahamCampbell/Result-Type/issues",
                 "source": "https://github.com/GrahamCampbell/Result-Type/tree/v1.0.1"
@@ -178,6 +183,8 @@
                     "type": "tidelift"
                 }
             ],
+=========
+>>>>>>>>> Temporary merge branch 2
             "time": "2020-04-13T13:17:36+00:00"
         },
         {
@@ -283,6 +290,7 @@
                 "php",
                 "type"
             ],
+<<<<<<<<< Temporary merge branch 1
             "support": {
                 "issues": "https://github.com/schmittjoh/php-option/issues",
                 "source": "https://github.com/schmittjoh/php-option/tree/1.7.5"
@@ -297,6 +305,8 @@
                     "type": "tidelift"
                 }
             ],
+=========
+>>>>>>>>> Temporary merge branch 2
             "time": "2020-07-20T17:29:33+00:00"
         },
         {
@@ -596,6 +606,7 @@
                 "polyfill",
                 "portable"
             ],
+<<<<<<<<< Temporary merge branch 1
             "support": {
                 "source": "https://github.com/symfony/polyfill-ctype/tree/v1.18.0"
             },
@@ -613,6 +624,8 @@
                     "type": "tidelift"
                 }
             ],
+=========
+>>>>>>>>> Temporary merge branch 2
             "time": "2020-07-14T12:35:20+00:00"
         },
         {
@@ -676,6 +689,7 @@
                 "portable",
                 "shim"
             ],
+<<<<<<<<< Temporary merge branch 1
             "support": {
                 "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.18.1"
             },
@@ -693,6 +707,8 @@
                     "type": "tidelift"
                 }
             ],
+=========
+>>>>>>>>> Temporary merge branch 2
             "time": "2020-07-14T12:35:20+00:00"
         },
         {
@@ -759,6 +775,7 @@
                 "portable",
                 "shim"
             ],
+<<<<<<<<< Temporary merge branch 1
             "support": {
                 "source": "https://github.com/symfony/polyfill-php80/tree/master"
             },
@@ -776,6 +793,8 @@
                     "type": "tidelift"
                 }
             ],
+=========
+>>>>>>>>> Temporary merge branch 2
             "time": "2020-07-14T12:35:20+00:00"
         },
         {
@@ -842,6 +861,7 @@
                 "env",
                 "environment"
             ],
+<<<<<<<<< Temporary merge branch 1
             "support": {
                 "issues": "https://github.com/vlucas/phpdotenv/issues",
                 "source": "https://github.com/vlucas/phpdotenv/tree/master"
@@ -856,6 +876,8 @@
                     "type": "tidelift"
                 }
             ],
+=========
+>>>>>>>>> Temporary merge branch 2
             "time": "2020-07-14T19:26:25+00:00"
         }
     ],
@@ -1789,6 +1811,7 @@
                 "testing",
                 "xunit"
             ],
+<<<<<<<<< Temporary merge branch 1
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/9.3.10"
@@ -1803,6 +1826,8 @@
                     "type": "github"
                 }
             ],
+=========
+>>>>>>>>> Temporary merge branch 2
             "time": "2020-09-12T09:34:39+00:00"
         },
         {
@@ -2757,6 +2782,7 @@
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
+<<<<<<<<< Temporary merge branch 1
             "support": {
                 "issues": "https://github.com/sebastianbergmann/version/issues",
                 "source": "https://github.com/sebastianbergmann/version/tree/3.0.1"
@@ -2767,6 +2793,8 @@
                     "type": "github"
                 }
             ],
+=========
+>>>>>>>>> Temporary merge branch 2
             "time": "2020-06-26T12:18:43+00:00"
         },
         {

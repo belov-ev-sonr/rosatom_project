@@ -2,4 +2,4 @@ src/vendor/
 composer.lock
 .idea
 tmp/
-*.env
+.env
