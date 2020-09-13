@@ -4,6 +4,7 @@ namespace Rosatom\FinReport\Application\Service\FinReportCRUD;
 
 use Rosatom\FinReport\Infrastructure\DTO\FinReportDTO\FinReportDTO;
 use Rosatom\FinReport\Infrastructure\Repositories\FinReportSqlRepositories\FinReportSqlRepositories;
+use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 
 class FinReportCRUD
 {
@@ -26,11 +27,11 @@ class FinReportCRUD
 
 
     public function readFineReport(int $inn){
-       $readOrganization =  $this->readOrganization($inn);
+       $readOrganization['infoOrg'] =  $this->readOrganization($inn);
 
-       $readDepositedMoney = $this->readDepositedMoney($inn);
+       $readDepositedMoney['depositedMoney'] = $this->readDepositedMoney($inn);
 
-       $readAccountBalance = $this->readAccountBalance($inn);
+       $readAccountBalance['accountBalance'] = $this->readAccountBalance($inn);
 
        $readFineReport = $readOrganization + $readDepositedMoney + $readAccountBalance;
 
@@ -75,11 +76,46 @@ class FinReportCRUD
     }
 
     public function updateFinReport(FinReportDTO $dataUpdate){
-        $this->sqlRepositories->updateAccountBalance($dataUpdate);
-
         $this->sqlRepositories->updateOrganization($dataUpdate);
+    }
 
+    public function updateAccountBalance(FinReportDTO $dataUpdate){
+        $this->sqlRepositories->updateAccountBalance($dataUpdate);
+    }
+
+    public function updateDepositedMoney(FinReportDTO $dataUpdate){
         return $this->sqlRepositories->updateDepositedMoney($dataUpdate);
     }
 
+    public function insertOrganization(FinReportDTO $dataInsertOrganization){
+
+        $isEmptyOrg = $this->sqlRepositories->readOrganization($dataInsertOrganization->getInn());
+        if(empty($isEmptyOrg)){
+            $this->sqlRepositories->insertOrganization($dataInsertOrganization);
+        }
+    }
+
+    public function insertDepositedMoney(FinReportDTO $dataDepositedMoney){
+        $idRes =  $this->sqlRepositories->insertDepositedMoney($dataDepositedMoney);
+
+        return $idRes;
+    }
+
+    public function insertAccountBalance(FinReportDTO $dataAccountBalance){
+        $this->sqlRepositories->insertAccountBalance($dataAccountBalance);
+    }
+
+
+    public function readFinReports(){
+        $orgs = $this->sqlRepositories->readOrganizations();
+        $orgsForParams = [];
+        $i=1;
+        foreach ($orgs as $org){
+            $i +=1;
+            $orgsForParams[$org['inn']]['infoOrg'] = $org;
+            $orgsForParams[$org['inn']]['depositedMoney'] = $this->readDepositedMoney($org['inn']);
+            $orgsForParams[$org['inn']]['accountBalance'] = $this->readAccountBalance($org['inn']);
+        }
+        return $orgsForParams;
+    }
 }

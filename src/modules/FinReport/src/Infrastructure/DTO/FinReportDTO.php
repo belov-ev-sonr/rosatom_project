@@ -30,17 +30,17 @@ class FinReportDTO
     private $type_of_contract;
 
     /**
-     * @var int
+     * @var string
      */
     private $date_of_signing;
 
     /**
-     * @var int
+     * @var string
      */
     private $date_start;
 
     /**
-     * @var int
+     * @var string
      */
     private $date_end;
 
@@ -89,6 +89,11 @@ class FinReportDTO
      */
     private $id_bank_account;
 
+    /**
+     * @var int
+     */
+    private $id;
+
 
     public function __construct($dataFinReport)
     {
@@ -109,6 +114,7 @@ class FinReportDTO
         $this->AccountBalanceCurrency = $dataFinReport['AccountBalanceCurrency'];
         $this->balance = $dataFinReport['balance'];
         $this->id_bank_account = $dataFinReport['id_bank_account'];
+        $this->id = $dataFinReport['id'];
     }
 
     /**
@@ -152,25 +158,25 @@ class FinReportDTO
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getDateOfSigning(): int
+    public function getDateOfSigning(): string
     {
         return $this->date_of_signing;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getDateStart(): int
+    public function getDateStart(): string
     {
         return $this->date_start;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getDateEnd(): int
+    public function getDateEnd(): string
     {
         return $this->date_end;
     }
@@ -246,6 +252,15 @@ class FinReportDTO
     {
         return $this->id_bank_account;
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
 
 
 
