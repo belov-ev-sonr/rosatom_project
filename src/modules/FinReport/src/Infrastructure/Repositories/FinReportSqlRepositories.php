@@ -195,13 +195,13 @@ class FinReportSqlRepositories
     }
 
     public function insertOrganization(FinReportDTO $dataInsert){
-        $idOrg = $dataInsert->getId();
+        //$idOrg = $dataInsert->getId();
         $kpp = $dataInsert->getKpp();
         $nameOrg = $dataInsert->getNameOrganization();
         $is_filial = $dataInsert->getIsFilial();
         $inn = $dataInsert->getInn();
 
-        if (is_null($dataInsert->getId())){
+        if (empty($dataInsert->getId())){
 
             $sql = "
                     INSERT INTO 
@@ -249,7 +249,7 @@ class FinReportSqlRepositories
         $currency = $dataInsert->getCurrency();
         $amount = $dataInsert->getAmount();
 
-        if (is_null($dataInsert->getId())){
+        if (empty($dataInsert->getId())){
             $idOrg = $lastId;
 
             $sql = "
@@ -304,12 +304,12 @@ class FinReportSqlRepositories
         $balance = $dataInsert->getBalance();
         $id_bank_account = $dataInsert->getIdBankAccount();
 
-        if (is_null($dataInsert->getId())){
+        if (empty($dataInsert->getId())){
             $idOrg = $lastId;
 
             $sql = "
                     INSERT INTO 
-                    deposited_money 
+                    account_balance 
                     (`bic_of_bank`, 
                 `name_of_bank`, 
                 `comment`, 

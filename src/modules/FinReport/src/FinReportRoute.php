@@ -44,17 +44,22 @@ class FinReportRoute
         $insertFinReport = new FinReportCRUD();
         $dataInsert = $request->getParsedBody();
 
+
         if (count($dataInsert) > 1){
             foreach ($dataInsert as $itemInsert){
+                $itemInsert['id'] = (int)$itemInsert['id'];
                 $itemInsert['date_of_signing'] = $this->parseUTCDate($itemInsert['date_of_signing']);
                 $itemInsert['date_start'] = $this->parseUTCDate($itemInsert['date_start']);
                 $itemInsert['date_end'] = $this->parseUTCDate($itemInsert['date_end']);
 
                 $saverDTO = new FinReportDTO($itemInsert);
+
                 $insertFinReport->insertOrganization($saverDTO);
             }
         }else{
+            $dataInsert['id'] = (int)$dataInsert['id'];
             $saverDTO = new FinReportDTO($dataInsert);
+
             $insertFinReport->insertOrganization($saverDTO);
         }
 

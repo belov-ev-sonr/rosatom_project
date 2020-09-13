@@ -88,7 +88,6 @@ class FinReportCRUD
     }
 
     public function insertOrganization(FinReportDTO $dataInsertOrganization){
-
         $lastId = $this->sqlRepositories->insertOrganization($dataInsertOrganization);
         $this->sqlRepositories->insertDepositedMoney($dataInsertOrganization, $lastId);
         $this->sqlRepositories->insertAccountBalance($dataInsertOrganization, $lastId);
@@ -118,7 +117,7 @@ class FinReportCRUD
 
             $readAccountBalance = $this->readAccountBalance($org['id']);
 
-            $organizationsForParams[$id] = $org + $readDepositedMoney + $readAccountBalance;
+            $organizationsForParams[$id] = array_merge($org, $readDepositedMoney, $readAccountBalance);
 
         }
 

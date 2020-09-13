@@ -136,7 +136,7 @@ class FinReportDTO
     /**
      * @return string
      */
-    public function getNameOrganization(): string
+    public function getNameOrganization(): ?string
     {
         return $this->nameOrganization;
     }
@@ -144,7 +144,7 @@ class FinReportDTO
     /**
      * @return string
      */
-    public function getIsFilial(): string
+    public function getIsFilial(): ?string
     {
         return $this->is_filial;
     }
@@ -152,7 +152,7 @@ class FinReportDTO
     /**
      * @return string
      */
-    public function getTypeOfContract(): string
+    public function getTypeOfContract(): ?string
     {
         return $this->type_of_contract;
     }
@@ -160,7 +160,7 @@ class FinReportDTO
     /**
      * @return string
      */
-    public function getDateOfSigning(): string
+    public function getDateOfSigning(): ?string
     {
         return $this->date_of_signing;
     }
@@ -168,7 +168,7 @@ class FinReportDTO
     /**
      * @return string
      */
-    public function getDateStart(): string
+    public function getDateStart(): ?string
     {
         return $this->date_start;
     }
@@ -176,7 +176,7 @@ class FinReportDTO
     /**
      * @return string
      */
-    public function getDateEnd(): string
+    public function getDateEnd(): ?string
     {
         return $this->date_end;
     }
@@ -184,7 +184,7 @@ class FinReportDTO
     /**
      * @return float
      */
-    public function getInterestRate(): float
+    public function getInterestRate(): ?float
     {
         return $this->interest_rate;
     }
@@ -192,7 +192,7 @@ class FinReportDTO
     /**
      * @return string
      */
-    public function getCurrency(): string
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
@@ -200,7 +200,7 @@ class FinReportDTO
     /**
      * @return float
      */
-    public function getAmount(): float
+    public function getAmount(): ?float
     {
         return $this->amount;
     }
@@ -208,7 +208,7 @@ class FinReportDTO
     /**
      * @return int
      */
-    public function getBicOfBank(): int
+    public function getBicOfBank(): ?int
     {
         return $this->bic_of_bank;
     }
@@ -216,7 +216,7 @@ class FinReportDTO
     /**
      * @return string
      */
-    public function getNameOfBank(): string
+    public function getNameOfBank(): ?string
     {
         return $this->name_of_bank;
     }
@@ -224,7 +224,7 @@ class FinReportDTO
     /**
      * @return string
      */
-    public function getComment(): string
+    public function getComment(): ?string
     {
         return $this->comment;
     }
@@ -232,7 +232,7 @@ class FinReportDTO
     /**
      * @return string
      */
-    public function getAccountBalanceCurrency(): string
+    public function getAccountBalanceCurrency(): ?string
     {
         return $this->AccountBalanceCurrency;
     }
@@ -240,7 +240,7 @@ class FinReportDTO
     /**
      * @return float
      */
-    public function getBalance(): float
+    public function getBalance(): ?float
     {
         return $this->balance;
     }
@@ -248,7 +248,7 @@ class FinReportDTO
     /**
      * @return int
      */
-    public function getIdBankAccount(): int
+    public function getIdBankAccount(): ?int
     {
         return $this->id_bank_account;
     }
