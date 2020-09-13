@@ -214,7 +214,6 @@ class FinReportSqlRepositories
                  '$is_filial',
                  '$inn')
                 ";
-
         $this->getDbCon()->insert($sql);
     }
 
@@ -255,6 +254,7 @@ class FinReportSqlRepositories
     }
 
     public function insertAccountBalance(FinReportDTO $dataInsert){
+
         $bic_of_bank = $dataInsert->getBicOfBank();
         $name_of_bank = $dataInsert->getNameOfBank();
         $comment = $dataInsert->getComment();

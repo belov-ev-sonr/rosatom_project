@@ -44,13 +44,15 @@ class FinReportRoute
         $insertFinReport = new FinReportCRUD();
         $dataInsert = $request->getParsedBody();
 
-        var_dump($dataInsert);
-        die();
-
-        $saverDTO = new FinReportDTO($dataInsert);
-
-
-        $insertFinReport->insertOrganization($saverDTO);
+        if (count($dataInsert) > 1){
+            foreach ($dataInsert as $itemInsert){
+                $saverDTO = new FinReportDTO($itemInsert);
+                $insertFinReport->insertOrganization($saverDTO);
+            }
+        }else{
+            $saverDTO = new FinReportDTO($dataInsert);
+            $insertFinReport->insertOrganization($saverDTO);
+        }
 
     }
 
