@@ -6,7 +6,7 @@ use Rosatom\Converters\Domain\Interfaces\Converter;
 
 class ConverterFactory
 {
-    public static function createConverter(string $converterType): Converter
+    public static function createConverter(string $converterType = null): Converter
     {
         return new XMLConverter();
     }
