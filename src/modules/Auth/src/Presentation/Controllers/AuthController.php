@@ -39,9 +39,8 @@ class AuthController
 
     public function getUserByRefreshToken(Request $request, Response $response): Response
     {
-        $refreshToken = $request->getQueryParam('token');
-
         $tokenService = $this->getTokenService();
+        $refreshToken = $tokenService->getTokenFromHeader();
         $userAccess = $tokenService->checkRefreshToken($refreshToken);
         if ($userAccess) {
             $userRepository = UserRepositoryFactory::createRepository();

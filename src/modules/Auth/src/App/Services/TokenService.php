@@ -52,6 +52,16 @@ class TokenService
         return $token;
     }
 
+    public function getTokenFromHeader(): ?string
+    {
+        $token = $this->getAuthorizationHeader();
+        if ($token) {
+            $token = preg_replace('/Bearer\s/', '', $token);
+        }
+        return $token;
+    }
+
+
     public function getAuthorizationHeader()
     {
         $headers = null;
