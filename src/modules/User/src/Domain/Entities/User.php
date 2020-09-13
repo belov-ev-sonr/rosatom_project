@@ -19,6 +19,8 @@ class User
     private $password;
     /** @var string */
     private $email;
+    /** @var int */
+    private $active;
 
     /**
      * User constructor.
@@ -35,7 +37,8 @@ class User
         string $middleName,
         string $phone,
         string $password,
-        string $email
+        string $email,
+        int $active
     ): self {
         $user = new self();
         $user->id = $id;
@@ -46,6 +49,7 @@ class User
         $user->phone = $phone;
         $user->password = $password;
         $user->email = $email;
+        $user->active = $active;
 
         return $user;
     }
@@ -61,6 +65,7 @@ class User
         $user->phone = (string)$userData['phone'];
         $user->password = (string)$userData['password'];
         $user->email = (string)$userData['email'];
+        $user->active = (int)$userData['active'];
 
         return $user;
     }
@@ -127,5 +132,13 @@ class User
     public function getPhone(): string
     {
         return $this->phone;
+    }
+
+    /**
+     * @return int
+     */
+    public function getActive(): int
+    {
+        return $this->active;
     }
 }

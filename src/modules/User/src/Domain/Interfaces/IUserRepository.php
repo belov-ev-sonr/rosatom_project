@@ -10,8 +10,13 @@ interface IUserRepository
     public function getUserById(int $id): ?User;
 
     /**
-     * @param int $id
      * @return User[]
      */
     public function getUsersList(): array;
+
+    public function insertUser(User $user): bool;
+
+    public function updateUser(User $user): bool;
+
+    public function deactivateUser(User $user): bool;
 }

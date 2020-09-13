@@ -34,7 +34,8 @@ class UserPresenter implements \JsonSerializable
             'firstName' => $this->getUser()->getFirstName(),
             'secondName' => $this->getUser()->getSecondName(),
             'middleName' => $this->getUser()->getMiddleName(),
-            'phone' => $this->getUser()->getPhone()
+            'phone' => $this->getUser()->getPhone(),
+            'active' => $this->getUser()->getActive(),
         ];
     }
 
