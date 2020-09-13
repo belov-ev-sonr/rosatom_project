@@ -19,7 +19,7 @@ class FinReportRoute
         $app->get('/{inn}', [$this,'readFinReport']);
         $app->post('/', [$this, 'insertFinReport']);
         $app->put('/{inn}', [$this, 'updateFinReport']);
-        $app->delete('/{inn}', [$this, 'deleteFinReport']);
+        $app->delete('/{id}', [$this, 'deleteFinReport']);
         $app->get('/', [$this, 'readFinReports']);
     }
 
@@ -91,9 +91,9 @@ class FinReportRoute
     }
 
     public function deleteFinReport(Request $request, Response $response){
-        $inn = $request->getAttribute('inn');
+        $id = $request->getAttribute('id');
         $deleteFinReport = new FinReportCRUD();
-        $deleteId = $deleteFinReport->deleteFinReport($inn);
+        $deleteId = $deleteFinReport->deleteFinReport($id);
         return $response->withJson($deleteId);
     }
 
