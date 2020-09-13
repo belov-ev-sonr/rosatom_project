@@ -16,9 +16,9 @@ class FinReportRoute
      */
     public function __construct(App $app)
     {
-        $app->get('/{inn}', [$this,'readFinReport']);
+        //$app->get('/{inn}', [$this,'readFinReport']);
         $app->post('/', [$this, 'insertFinReport']);
-        $app->put('/{inn}', [$this, 'updateFinReport']);
+        //$app->put('/{inn}', [$this, 'updateFinReport']);
         $app->delete('/{id}', [$this, 'deleteFinReport']);
         $app->get('/', [$this, 'readFinReports']);
     }
@@ -46,6 +46,10 @@ class FinReportRoute
 
         if (count($dataInsert) > 1){
             foreach ($dataInsert as $itemInsert){
+                $itemInsert['date_of_signing'] = $this->parseUTCDate($itemInsert['date_of_signing']);
+                $itemInsert['date_start'] = $this->parseUTCDate($itemInsert['date_start']);
+                $itemInsert['date_end'] = $this->parseUTCDate($itemInsert['date_end']);
+
                 $saverDTO = new FinReportDTO($itemInsert);
                 $insertFinReport->insertOrganization($saverDTO);
             }

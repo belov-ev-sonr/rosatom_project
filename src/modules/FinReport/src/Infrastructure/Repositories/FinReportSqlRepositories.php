@@ -201,17 +201,38 @@ class FinReportSqlRepositories
         $is_filial = $dataInsert->getIsFilial();
         $inn = $dataInsert->getInn();
 
-        $sql = "
-                INSERT INTO 
-                new_org 
-                SET 
-                `kpp`= '$kpp', 
-                `name`='$nameOrg', 
-                `is_filial`='$is_filial', 
-                `inn`='$inn'
-                ON DUPLICATE KEY UPDATE 
-                `id`= '$idOrg'
-                ";
+        if (is_null($dataInsert->getId())){
+
+            $sql = "
+                    INSERT INTO 
+                    new_org 
+                    (`kpp`, 
+                    `name`, 
+                    `is_filial`, 
+                    `inn`) 
+                    VALUES 
+                    ('$kpp', 
+                    '$nameOrg', 
+                    '$is_filial', 
+                    '$inn' )
+                    ";
+        }else{
+            $idOrg = $dataInsert->getId();
+
+            $sql = "
+                    UPDATE 
+                    new_org 
+                    SET 
+                    `kpp`= '$kpp', 
+                    `name`='$nameOrg', 
+                    `is_filial`='$is_filial', 
+                    `inn`='$inn' 
+                    WHERE 
+                    `id`= '$idOrg'
+                    ";
+        }
+
+
 
         $this->getDbCon()->insert($sql);
 
@@ -219,7 +240,7 @@ class FinReportSqlRepositories
     }
 
     public function insertDepositedMoney(FinReportDTO $dataInsert, $lastId){
-        $idOrg = is_null($dataInsert->getId()) ? $lastId : $dataInsert->getId();
+
         $type_of_contract = $dataInsert->getTypeOfContract();
         $date_of_signing = $dataInsert->getDateOfSigning();
         $date_start = $dataInsert->getDateStart();
@@ -228,26 +249,54 @@ class FinReportSqlRepositories
         $currency = $dataInsert->getCurrency();
         $amount = $dataInsert->getAmount();
 
-        $sql = "
-                INSERT INTO 
-                deposited_money 
-                SET 
-                `type_of_contract`= '$type_of_contract', 
-                `date_of_signing`='$date_of_signing', 
-                `date_start`='$date_start', 
-                `date_end`='$date_end', 
-                `date_end`='$date_end', 
-                `interest_rate`='$interest_rate', 
-                `currency`='$currency', 
-                `amount`='$amount' 
-                ON DUPLICATE KEY UPDATE 
-                `id_organization`= '$idOrg'
-                ";
+        if (is_null($dataInsert->getId())){
+            $idOrg = $lastId;
+
+            $sql = "
+                    INSERT INTO 
+                    deposited_money 
+                    (`type_of_contract`, 
+                    `date_of_signing`, 
+                    `date_start`, 
+                    `date_end`, 
+                    `interest_rate`, 
+                    `currency`, 
+                    `amount`,
+                    `id_organization`) 
+                    VALUES 
+                    ('$type_of_contract', 
+                    '$date_of_signing', 
+                    '$date_start', 
+                    '$date_end', 
+                    '$interest_rate', 
+                    '$currency', 
+                    '$amount',
+                    '$idOrg')
+                    ";
+        }else{
+            $idOrg = $dataInsert->getId();
+
+            $sql = "
+                    UPDATE 
+                    deposited_money 
+                    SET 
+                    `type_of_contract`= '$type_of_contract', 
+                    `date_of_signing`='$date_of_signing', 
+                    `date_start`='$date_start', 
+                    `date_end`='$date_end', 
+                    `interest_rate`='$interest_rate', 
+                    `currency`='$currency', 
+                    `amount`='$amount' 
+                    WHERE 
+                    `id_organization`= '$idOrg'
+                    ";
+        }
+
         $this->getDbCon()->insert($sql);
     }
 
     public function insertAccountBalance(FinReportDTO $dataInsert, $lastId){
-        $idOrg = is_null($dataInsert->getId()) ? $lastId : $dataInsert->getId();
+
         $bic_of_bank = $dataInsert->getBicOfBank();
         $name_of_bank = $dataInsert->getNameOfBank();
         $comment = $dataInsert->getComment();
@@ -255,19 +304,45 @@ class FinReportSqlRepositories
         $balance = $dataInsert->getBalance();
         $id_bank_account = $dataInsert->getIdBankAccount();
 
-        $sql = "
-                INSERT INTO 
-                account_balance 
-                SET 
-                `bic_of_bank`= '$bic_of_bank', 
-                `name_of_bank`='$name_of_bank', 
-                `comment`='$comment', 
-                `currency`='$currency', 
-                `balance`='$balance', 
-                `id_bank_account`='$id_bank_account' 
-                ON DUPLICATE KEY UPDATE 
-                `id_organization`= '$idOrg'
-                ";
+        if (is_null($dataInsert->getId())){
+            $idOrg = $lastId;
+
+            $sql = "
+                    INSERT INTO 
+                    deposited_money 
+                    (`bic_of_bank`, 
+                `name_of_bank`, 
+                `comment`, 
+                `currency`, 
+                `balance`, 
+                `id_bank_account`,
+                `id_organization`) 
+                    VALUES 
+                    ('$bic_of_bank', 
+                    '$name_of_bank', 
+                    '$comment', 
+                    '$currency', 
+                    '$balance', 
+                    '$id_bank_account',
+                     '$idOrg')
+                    ";
+        }else{
+            $idOrg = $dataInsert->getId();
+
+            $sql = "
+                    UPDATE 
+                    account_balance 
+                    SET 
+                    `bic_of_bank`= '$bic_of_bank', 
+                    `name_of_bank`='$name_of_bank', 
+                    `comment`='$comment', 
+                    `currency`='$currency', 
+                    `balance`='$balance', 
+                    `id_bank_account`='$id_bank_account'
+                    WHERE 
+                    `id_organization`= '$idOrg'
+                    ";
+        }
 
         $this->getDbCon()->insert($sql);
     }
