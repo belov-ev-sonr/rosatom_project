@@ -16,14 +16,23 @@ class AuthController
 
         $userRepository = UserRepositoryFactory::createRepository();
         $user = $userRepository->getUserByEmail($email, $passwordHash);
+        if ($user) {
+            $tokenService = $this->getTokenService();
+            $accessToken = $tokenService->generateAccessToken($user->getId());
+            $refreshToken = $tokenService->generateRefreshToken($user->getId());
+            $response = $response->withJson([
+                'accessToken' => $accessToken,
+                'refreshToken' => $refreshToken
+            ]);
+        } else {
+            $response = $response
+                ->withStatus(401)
+                ->withJson([
+                'status' => false
+            ]);
+        }
 
-        $tokenService = $this->getTokenService();
-
-        $accessToken = $tokenService->generateAccessToken($user->getId());
-        $refreshToken = $tokenService->generateRefreshToken($user->getId());
-
-        return $response->withJson(['accessToken' => $accessToken, 'refreshToken'=>$refreshToken]);
-
+        return $response;
     }
 
     public function refresh(Request $request, Response $response): Response
