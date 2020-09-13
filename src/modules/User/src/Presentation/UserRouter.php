@@ -14,5 +14,6 @@ class UserRouter
     public function __construct(App $app)
     {
         $app->post('/list', [new UserController(), 'getUsersList']);
+        $app->get('/{id}', [new UserController(), 'getUsersById']);
     }
 }

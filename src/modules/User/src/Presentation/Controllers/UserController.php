@@ -18,5 +18,14 @@ class UserController
         }
 
         return $response->withJson($presenters);
-     }
+    }
+
+    public function getUsersById(Request $request, Response $response): Response
+    {
+        $userId = (int)$request->getAttributes('id');
+        $repository = UserRepositoryFactory::createRepository();
+        $user = $repository->getUserById($userId);
+
+        return $response->withJson(new UserPresenter($user));
+    }
 }
