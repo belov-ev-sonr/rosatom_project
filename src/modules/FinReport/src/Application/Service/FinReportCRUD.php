@@ -53,6 +53,7 @@ class FinReportCRUD
 
     public function deleteFinReport(int $id)
     {
+
         $this->deleteOrganization($id);
 
         $this->deleteDepositedMoney($id);
@@ -60,9 +61,9 @@ class FinReportCRUD
         $this->deleteAccountBalance($id);
     }
 
-    public function deleteOrganization(int $inn)
+    public function deleteOrganization(int $id)
     {
-        $this->sqlRepositories->deleteOrganization($inn);
+        $this->sqlRepositories->deleteOrganization($id);
 
     }
 
@@ -88,7 +89,6 @@ class FinReportCRUD
     }
 
     public function insertOrganization(FinReportDTO $dataInsertOrganization){
-
         $lastId = $this->sqlRepositories->insertOrganization($dataInsertOrganization);
         $this->sqlRepositories->insertDepositedMoney($dataInsertOrganization, $lastId);
         $this->sqlRepositories->insertAccountBalance($dataInsertOrganization, $lastId);
@@ -118,7 +118,7 @@ class FinReportCRUD
 
             $readAccountBalance = $this->readAccountBalance($org['id']);
 
-            $organizationsForParams[$id] = $org + $readDepositedMoney + $readAccountBalance;
+            $organizationsForParams[$id] = array_merge($org, $readDepositedMoney, $readAccountBalance);
 
         }
 

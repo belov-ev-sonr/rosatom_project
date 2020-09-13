@@ -44,17 +44,22 @@ class FinReportRoute
         $insertFinReport = new FinReportCRUD();
         $dataInsert = $request->getParsedBody();
 
+
         if (count($dataInsert) > 1){
             foreach ($dataInsert as $itemInsert){
+                $itemInsert['id'] = (int)$itemInsert['id'];
                 $itemInsert['date_of_signing'] = $this->parseUTCDate($itemInsert['date_of_signing']);
                 $itemInsert['date_start'] = $this->parseUTCDate($itemInsert['date_start']);
                 $itemInsert['date_end'] = $this->parseUTCDate($itemInsert['date_end']);
 
                 $saverDTO = new FinReportDTO($itemInsert);
+
                 $insertFinReport->insertOrganization($saverDTO);
             }
         }else{
+            $dataInsert['id'] = (int)$dataInsert['id'];
             $saverDTO = new FinReportDTO($dataInsert);
+
             $insertFinReport->insertOrganization($saverDTO);
         }
 
@@ -98,7 +103,7 @@ class FinReportRoute
         $id = $request->getAttribute('id');
         $deleteFinReport = new FinReportCRUD();
         $deleteId = $deleteFinReport->deleteFinReport($id);
-        return $response->withJson($deleteId);
+        return $response->withJson($id);
     }
 
     public function readFinReports(Request $request, Response $response){
