@@ -18,7 +18,8 @@
     "ext-ctype": "*",
     "ext-hash": "*",
     "vlucas/phpdotenv": "^5.1",
-    "bupy7/xml-constructor": "*"
+    "bupy7/xml-constructor": "*",
+    "ext-soap": "*"
   },
   "autoload": {
     "psr-0": {},
@@ -28,7 +29,8 @@
       "Rosatom\\Converters\\": "src/modules/Converters/src/",
       "Rosatom\\Reports\\": "src/modules/Reports/src/",
       "Rosatom\\Auth\\": "src/modules/Auth/src/",
-      "Rosatom\\User\\": "src/modules/User/src/"
+      "Rosatom\\User\\": "src/modules/User/src/",
+      "Rosatom\\RateCurrencies\\": "src/modules/RateCurrencies/src"
     }
   },
   "scripts": {
