@@ -45,11 +45,11 @@ class DBConnect
 
     public static function init(): void
     {
-        $host ='vh58.timeweb.ru';
-        $user = 'kyplinov_rosatom';
-        $pass = 'qwerosatom1234';
-        $dbName = 'kyplinov_rosatom';
-        $port = '3306';
+        $host = getenv('DB_HOST');
+        $user = getenv('DB_USER');
+        $pass = getenv('DB_PASS');
+        $dbName = getenv('DB_NAME');
+        $port = getenv('DB_PORT');
         $resource = new \mysqli($host, $user, $pass, $dbName, $port);
         self::isDBError($resource);
         self::$mysqli = $resource;

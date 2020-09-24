@@ -5,17 +5,14 @@ use Rosatom\Auth\Presentation\AuthRouter;
 use Rosatom\Common\DBConnect;
 use Rosatom\FinReport\FinReportRoute;
 use Rosatom\RateCurrencies\Presentation\RateOfCurrencyRouter;
-use Rosatom\ReferenceData\Presentation\ReferenceRouter;
 use Rosatom\Reports\Presentation\ReportsRouter;
 use Rosatom\User\Presentation\UserRouter;
 use Slim\App;
-use Slim\Http\Request;
-use Slim\Http\Response;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/src/vendor/autoload.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/src/modules/common/enableCors.php';
 
-$dotenv = Dotenv::createImmutable($_SERVER['DOCUMENT_ROOT']);
+$dotenv = Dotenv::create(__DIR__);
 $dotenv->load();
 
 $config = ['settings' => ['displayErrorDetails' => true]];
